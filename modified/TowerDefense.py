@@ -1,5 +1,3 @@
-#IMPORTANT INFORMATION: the use of 'self' ALWAYS refers to the class that it is in. EVERY FUNCTION INSIDE OF A CLASS MUST DECLARE SELF! ex: 'def exampleFunction(self, input1, input2):
-
 from tkinter import *
 from PIL import Image
 from PIL import ImageTk
@@ -41,7 +39,7 @@ class TowerDefenseGame(Game):
           self.mouse = Mouse(self)
           self.gameMap = Map()
           self.wavegenerator = Wavegenerator(self)
-          self.run() #calls the function 'def run(self):'
+          self.run() 
           self.root.mainloop() #starts running the tkinter graphics loop
 
 
