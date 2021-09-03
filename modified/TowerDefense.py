@@ -954,8 +954,9 @@ class WaterBlock(Block):
      def __init__(self,x,y,blockNumber,gridx,gridy):
           super(WaterBlock,self).__init__(x,y,blockNumber,gridx,gridy)
           self.canPlace = False 
-                                  
-game=Game() #start the application at Class Game()
 
+def main():
+     game=Game()
 
-
+if __name__ == "__main__":
+     main()
