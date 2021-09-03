@@ -30,7 +30,11 @@ money = 5000000000
 selectedTower = "<None>"
 displayTower = None
 
-class Game(): #the main class that we call "Game"
+class Game():
+     def __init__(self):
+          pass
+
+class TowerDefenseGame(Game):
      def __init__(self): #setting up the window for the game here
           self.root=Tk() #saying this window will use tkinter
           self.root.title("Tower Defense Ultra Mode")
@@ -959,7 +963,7 @@ class WaterBlock(Block):
           self.canPlace = False 
 
 def main():
-     game=Game()
+     game=TowerDefenseGame()
 
 if __name__ == "__main__":
      main()
