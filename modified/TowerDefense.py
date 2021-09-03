@@ -2,10 +2,10 @@
 
 from tkinter import *
 from PIL import Image
-from PIL import ImageDraw
 from PIL import ImageTk
 import random
 import math
+
 gridSize = 30 #the height and width of the array of blocks
 blockSize = 20 #pixels wide of each block
 mapSize = gridSize*blockSize
@@ -34,7 +34,7 @@ class Game(): #the main class that we call "Game"
      def __init__(self): #setting up the window for the game here
           self.root=Tk() #saying this window will use tkinter
           self.root.title("Tower Defense Ultra Mode")
-          self.RUN=True #creating a variable RUN. does nothing yet.hu
+          self.running=True #creating a variable RUN. does nothing yet.hu
           self.root.protocol("WM_DELETE_WINDOW", self.end)
 
           self.frame = Frame(master= self.root)
@@ -60,11 +60,12 @@ class Game(): #the main class that we call "Game"
           self.root.mainloop() #starts running the tkinter graphics loop
 
      def run(self):
-          if self.RUN is True: #always going to be true for now
-               self.update() #calls the function 'def update(self):'
-               self.paint() #calls the function 'def paint(self):'
-               
-               self.root.after(50, self.run) #does a run of the function every 50/1000 = 1/20 of a second
+          if not self.running: #always going to be true for now
+               return
+          self.update() #calls the function 'def update(self):'
+          self.paint() #calls the function 'def paint(self):'
+          
+          self.root.after(50, self.run) #does a run of the function every 50/1000 = 1/20 of a second
             
      def end(self):
         self.root.destroy() #closes the game window and ends the program
@@ -237,14 +238,16 @@ class Wavegenerator():
           self.currentMonster = self.currentMonster + 1
 
      def update(self):
-          if self.done == False:
-               if self.currentMonster == len(self.currentWave):
-                    self.game.displayboard.nextWaveButton.canPress = True
-               else:
-                    self.ticks = self.ticks+1
-                    if self.ticks == self.maxTicks:
-                         self.ticks = 0
-                         self.spawnMonster()
+          if self.done:
+               return
+
+          if self.currentMonster == len(self.currentWave):
+               self.game.displayboard.nextWaveButton.canPress = True
+          else:
+               self.ticks = self.ticks+1
+               if self.ticks == self.maxTicks:
+                    self.ticks = 0
+                    self.spawnMonster()
 
 class NextWaveButton:
      def __init__(self,game):
@@ -255,10 +258,14 @@ class NextWaveButton:
           self.yTwo = 50
           self.canPress = True
 
+     def is_within_bounds(self, x: int, y: int):
+          return self.x <= x <= self.xTwo and self.y <= y <= self.yTwo
+
      def checkPress(self, click, x, y):
-          if x >=self.x and y >= self.y and x <= self.xTwo and y <= self.yTwo:
-                if self.canPress and click and len(monsters) == 0:
-                     self.game.wavegenerator.getWave()
+          if not self.is_within_bounds(x=x, y=y):
+               return
+          if self.canPress and click and len(monsters) == 0:
+               self.game.wavegenerator.getWave()
 
      def paint(self, canvas):
           if self.canPress and len(monsters) == 0:
@@ -268,7 +275,7 @@ class NextWaveButton:
           canvas.create_rectangle(self.x, self.y, self.xTwo, self.yTwo, fill=self.color, outline = self.color) #draws a rectangle where the pointer is
           canvas.create_text(500,37,text = "Next Wave")
           
-class MyButton(object):
+class MyButton:
      def __init__(self, x, y, xTwo, yTwo):
         self.x = x
         self.y = y
@@ -308,8 +315,6 @@ class StickyButton(MyButton):
              displayTower.stickyTarget = False
 
 class SellButton(MyButton):
-    def __init__(self, x, y, xTwo, yTwo):
-        super(SellButton,self).__init__(x, y, xTwo, yTwo)
              
     def pressed(self):
          global displayTower
@@ -317,8 +322,6 @@ class SellButton(MyButton):
          displayTower = None
 
 class UpgradeButton(MyButton):
-    def __init__(self, x, y, xTwo, yTwo):
-        super(UpgradeButton,self).__init__(x, y, xTwo, yTwo)
              
     def pressed(self):
          global money
