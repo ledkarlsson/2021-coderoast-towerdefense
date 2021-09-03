@@ -44,9 +44,7 @@ class TowerDefenseGame(Game):
 
 
      def update(self):
-         self.mouse.update()
-         self.wavegenerator.update()
-         self.displayboard.update()
+         super().update()
          for i in range(len(projectiles)):
              try:
                  projectiles[i].update()
@@ -60,6 +58,7 @@ class TowerDefenseGame(Game):
                  monsters[i].update()
              except:
                  pass
+               
          global monstersByHealth
          global monstersByHealthReversed
          global monstersByDistance
@@ -77,9 +76,7 @@ class TowerDefenseGame(Game):
                     towerGrid[x][y].update() #updates each tower one by one by going to its 'def update():' command             
           
      def paint(self):
-          self.canvas.delete(ALL) #clear the screen
-          self.gameMap.paint(self.canvas)
-          self.mouse.paint(self.canvas) #draw the mouse dot by going to its 'def paint(canvas):' command
+          super().paint()
           for y in range(gridSize):
               for x in range(gridSize):
                    if towerGrid[x][y]:
