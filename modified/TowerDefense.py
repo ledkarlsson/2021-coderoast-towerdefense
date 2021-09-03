@@ -44,16 +44,6 @@ class TowerDefenseGame(Game):
           self.run() #calls the function 'def run(self):'
           self.root.mainloop() #starts running the tkinter graphics loop
 
-     def run(self):
-          if not self.running: #always going to be true for now
-               return
-          self.update() #calls the function 'def update(self):'
-          self.paint() #calls the function 'def paint(self):'
-          
-          self.root.after(50, self.run) #does a run of the function every 50/1000 = 1/20 of a second
-            
-     def end(self):
-        self.root.destroy() #closes the game window and ends the program
 
      def update(self):
          self.mouse.update()
