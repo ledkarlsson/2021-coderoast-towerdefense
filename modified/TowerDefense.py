@@ -40,8 +40,6 @@ class TowerDefenseGame(Game):
           self.gameMap = Map()
           self.wavegenerator = Wavegenerator(self)
           self.run() 
-          self.root.mainloop() #starts running the tkinter graphics loop
-
 
      def update(self):
          super().update()
