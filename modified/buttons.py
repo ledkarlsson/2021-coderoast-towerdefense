@@ -1,3 +1,10 @@
+from myButton import MyButton
+
+class TargetButton(MyButton):
+    def __init__(self, x, y, xTwo, yTwo, myType):
+        super().__init__( x, y, xTwo, yTwo)
+        self.type = myType
+     
 class NextWaveButton:
      def __init__(self,game):
           self.game = game
@@ -23,3 +30,5 @@ class NextWaveButton:
                self.color = "red"
           canvas.create_rectangle(self.x, self.y, self.xTwo, self.yTwo, fill=self.color, outline = self.color) #draws a rectangle where the pointer is
           canvas.create_text(500,37,text = "Next Wave")
+
+
