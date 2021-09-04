@@ -274,9 +274,7 @@ class TargetButton(MyButton):
          displayTower.targetList = self.type
 
 class StickyButton(MyButton):
-    def __init__(self, x, y, xTwo, yTwo):
-        super().__init__(x, y, xTwo, yTwo)
-             
+
     def pressed(self):
          global displayTower
          if displayTower.stickyTarget == False:
@@ -915,8 +913,7 @@ class Block:
           self.image = None
 
 class NormalBlock(Block):
-     def __init__(self,x,y,blockNumber,gridx,gridy):
-          super().__init__(x,y,blockNumber,gridx,gridy)
+     pass
 
 class PathBlock(Block):
      def __init__(self,x,y,blockNumber,gridx,gridy):
