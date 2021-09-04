@@ -31,6 +31,9 @@ money = 5000000000
 selectedTower = "<None>"
 displayTower = None
 
+class GameState:
+     def __init__(self, money):
+         self.money = money
 class TowerDefenseGame(Game):
      def __init__(self): #setting up the window for the game here
           super().__init__(title="Tower Defense Ultra Mode", width=mapSize, height=mapSize, timestep=10)
@@ -47,6 +50,8 @@ class TowerDefenseGame(Game):
           self.add_object(self.mouse)
           self.add_object(self.displayboard)
           self.add_object(self.wavegenerator)
+
+          self.gameState = GameState(money)
           self.run() 
 
      def update(self):
@@ -663,7 +668,9 @@ class Monster:
 
      def update(self):
           if self.health <= 0:
-              self.killed()
+               global money
+               money += self.value
+               self.killed()
           self.move()
 
      def move(self):
@@ -704,8 +711,6 @@ class Monster:
          return self.xPos,self.yPos
 
      def killed(self):
-          global money
-          money += self.value
           self.die()
 
      def gotThrough(self):
@@ -745,8 +750,6 @@ class Monster2(Monster):
           self.axis = blockSize/2
 
      def killed(self):
-          global money
-          money += self.value
           monsters.append(Monster1(self.distanceTravelled + blockSize*(.5-random.random())))
           self.die()
 
@@ -761,8 +764,6 @@ class AlexMonster(Monster):
           self.axis = blockSize
 
      def killed(self):
-          global money
-          money += self.value
           for i in range(5):
                monsters.append(Monster2(self.distanceTravelled + blockSize*(.5-random.random())))
           self.die()
@@ -778,8 +779,6 @@ class BenMonster(Monster):
           self.axis = blockSize/2
 
      def killed(self):
-          global money
-          money += self.value
           for i in range(2):
                monsters.append(LeoMonster(self.distanceTravelled + blockSize*(.5-random.random())))
           self.die()
