@@ -10,6 +10,7 @@ class Game():
           self.frame = tk.Frame(master=self.root)
           self.frame.grid(row=0, column=0)
           self.timestep = timestep
+          self.running = False
 
           # actually creates a window and puts our frame on it
           self.canvas = tk.Canvas(master=self.frame, width=width,
@@ -18,17 +19,14 @@ class Game():
           self.canvas.grid(row=0, column=0, rowspan=2, columnspan=1)
 
      def run(self):
+          self.running = True
           self._run()
           self.root.mainloop() #starts running the tkinter graphics loop          
 
      def _run(self):
-          if not self.running:  # always going to be true for now
-               return
           self.update()  # calls the function 'def update(self):'
           self.paint()  # calls the function 'def paint(self):'
-
-          # does a run of the function every timestep/1000 of a second
-          self.root.after(self.timestep, self._run)
+          self.root.after(self.timestep, self._run) # does a run of the function every timestep/1000 of a second
 
      def end(self):
         self.root.destroy()  # closes the game window and ends the program
