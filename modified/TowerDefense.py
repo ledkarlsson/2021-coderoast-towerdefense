@@ -5,6 +5,7 @@ import random
 import math
 from game import Game, GameObject
 from myButton import MyButton
+from buttons import NextWaveButton
 
 gridSize = 30 #the height and width of the array of blocks
 blockSize = 20 #pixels wide of each block
@@ -224,32 +225,6 @@ class Wavegenerator(GameObject):
                     self.ticks = 0
                     self.spawnMonster()
 
-class NextWaveButton:
-     def __init__(self,game):
-          self.game = game
-          self.x = 450
-          self.y = 25
-          self.xTwo = 550
-          self.yTwo = 50
-          self.canPress = True
-
-     def is_within_bounds(self, x: int, y: int):
-          return self.x <= x <= self.xTwo and self.y <= y <= self.yTwo
-
-     def checkPress(self, click, x, y):
-          if not self.is_within_bounds(x=x, y=y):
-               return
-          if self.canPress and click and len(monsters) == 0:
-               self.game.wavegenerator.getWave()
-
-     def paint(self, canvas):
-          if self.canPress and len(monsters) == 0:
-               self.color = "blue"
-          else:
-               self.color = "red"
-          canvas.create_rectangle(self.x, self.y, self.xTwo, self.yTwo, fill=self.color, outline = self.color) #draws a rectangle where the pointer is
-          canvas.create_text(500,37,text = "Next Wave")
-          
 class TargetButton(MyButton):
     def __init__(self, x, y, xTwo, yTwo, myType):
         super().__init__( x, y, xTwo, yTwo)
@@ -367,7 +342,7 @@ class Displayboard:
           self.canvas.delete(ALL) #clear the screen
           self.healthbar.paint(self.canvas)
           self.moneybar.paint(self.canvas)
-          self.nextWaveButton.paint(self.canvas)
+          self.nextWaveButton.paint(self.canvas,monsters)
                
 
 class Towerbox:
@@ -439,7 +414,7 @@ class Mouse(GameObject):
           if self.gridx >= 0 and self.gridx <= gridSize-1 and self.gridy >= 0 and self.gridy <= gridSize-1:
                blockGrid[self.gridx][self.gridy].hoveredOver(self.pressed, self.game)
           else:
-               self.game.displayboard.nextWaveButton.checkPress(self.pressed, self.x-self.xoffset, self.y-self.yoffset)
+               self.game.displayboard.nextWaveButton.checkPress(self.pressed, self.x-self.xoffset, self.y-self.yoffset,monsters)
                self.game.infoboard.buttonsCheck(self.pressed, self.x-self.xoffset, self.y-self.yoffset)
      def paint(self, canvas):
           if self.gridx >= 0 and self.gridx <= gridSize-1 and self.gridy >= 0 and self.gridy <= gridSize-1:
