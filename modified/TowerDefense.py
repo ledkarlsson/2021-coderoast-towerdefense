@@ -266,7 +266,7 @@ class MyButton:
 
 class TargetButton(MyButton):
     def __init__(self, x, y, xTwo, yTwo, myType):
-        super(TargetButton,self).__init__( x, y, xTwo, yTwo)
+        super().__init__( x, y, xTwo, yTwo)
         self.type = myType
      
     def pressed(self):
@@ -275,7 +275,7 @@ class TargetButton(MyButton):
 
 class StickyButton(MyButton):
     def __init__(self, x, y, xTwo, yTwo):
-        super(StickyButton,self).__init__(x, y, xTwo, yTwo)
+        super().__init__(x, y, xTwo, yTwo)
              
     def pressed(self):
          global displayTower
@@ -518,7 +518,7 @@ class Projectile:
 
 class TrackingBullet(Projectile):
     def __init__(self,x,y,damage,speed,target):
-          super(TrackingBullet,self).__init__(x,y, damage,speed)
+          super().__init__(x,y, damage,speed)
           self.target = target
           self.image = Image.open("images/projectileImages/bullet.png")
           self.image = ImageTk.PhotoImage(self.image) 
@@ -534,7 +534,7 @@ class TrackingBullet(Projectile):
 
 class PowerShot(TrackingBullet):
     def __init__(self,x,y,damage,speed,target,slow):
-         super(PowerShot,self).__init__(x,y, damage,speed,target)
+         super().__init__(x,y, damage,speed,target)
          self.slow = slow
          self.image = Image.open("images/projectileImages/powerShot.png")
          self.image = ImageTk.PhotoImage(self.image)
@@ -547,7 +547,7 @@ class PowerShot(TrackingBullet):
         
 class AngledProjectile(Projectile):
      def __init__(self,x,y,damage,speed,angle,givenRange):
-          super(AngledProjectile,self).__init__(x,y,damage,speed)
+          super().__init__(x,y,damage,speed)
           self.xChange = speed*math.cos(angle)
           self.yChange = speed*math.sin(-angle)
           self.range = givenRange
@@ -611,7 +611,7 @@ class Tower:
 
 class ShootingTower(Tower):
      def __init__(self,x,y,gridx,gridy):
-        super(ShootingTower,self).__init__(x,y,gridx,gridy)
+        super().__init__(x,y,gridx,gridy)
         self.bulletsPerSecond = None
         self.ticks = 0
         self.damage = 0
@@ -622,7 +622,7 @@ class ShootingTower(Tower):
               
 class TargetingTower(ShootingTower):
     def __init__(self,x,y,gridx,gridy):
-        super(TargetingTower,self).__init__(x,y,gridx,gridy)
+        super().__init__(x,y,gridx,gridy)
         self.target = None
         self.targetList = 0
         self.stickyTarget = False
@@ -650,7 +650,7 @@ class TargetingTower(ShootingTower):
 
 class ArrowShooterTower(TargetingTower):
      def __init__(self,x,y,gridx,gridy):
-          super(ArrowShooterTower,self).__init__(x,y,gridx,gridy)
+          super().__init__(x,y,gridx,gridy)
           self.name = "Arrow Shooter"
           self.infotext = "ArrowShooterTower at [" + str(gridx) + "," + str(gridy) + "]."
           self.range = blockSize*10
@@ -674,7 +674,7 @@ class ArrowShooterTower(TargetingTower):
           
 class BulletShooterTower(TargetingTower):
      def __init__(self,x,y,gridx,gridy):
-          super(BulletShooterTower,self).__init__(x,y,gridx,gridy)
+          super().__init__(x,y,gridx,gridy)
           self.name = "Bullet Shooter"
           self.infotext = "BulletShooterTower at [" + str(gridx) + "," + str(gridy) + "]."
           self.range = blockSize*6
@@ -701,7 +701,7 @@ class PowerTower(TargetingTower):
  
 class TackTower(TargetingTower):
      def __init__(self,x,y,gridx,gridy):
-          super(TackTower,self).__init__(x,y,gridx,gridy)
+          super().__init__(x,y,gridx,gridy)
           self.name = "Tack Tower"
           self.infotext = "TackTower at [" + str(gridx) + "," + str(gridy) + "]."
           self.range = blockSize*5
@@ -800,7 +800,7 @@ class Monster:
 
 class Monster1(Monster):
      def __init__(self,distance):
-          super(Monster1,self).__init__(distance)
+          super().__init__(distance)
           self.maxHealth = 30
           self.health = self.maxHealth
           self.value = 5
@@ -810,7 +810,7 @@ class Monster1(Monster):
           
 class Monster2(Monster):
      def __init__(self,distance):
-          super(Monster2,self).__init__(distance)
+          super().__init__(distance)
           self.maxHealth = 50
           self.health = self.maxHealth
           self.value = 10
@@ -826,7 +826,7 @@ class Monster2(Monster):
 
 class AlexMonster(Monster):
      def __init__(self,distance):
-          super(AlexMonster,self).__init__(distance)
+          super().__init__(distance)
           self.maxHealth = 500
           self.health = self.maxHealth
           self.value = 100
@@ -843,7 +843,7 @@ class AlexMonster(Monster):
 
 class BenMonster(Monster):
      def __init__(self,distance):
-          super(BenMonster,self).__init__(distance)
+          super().__init__(distance)
           self.maxHealth = 200
           self.health = self.maxHealth
           self.value = 30
@@ -860,7 +860,7 @@ class BenMonster(Monster):
 
 class LeoMonster(Monster):
      def __init__(self,distance):
-          super(LeoMonster,self).__init__(distance)
+          super().__init__(distance)
           self.maxHealth = 20
           self.health = self.maxHealth
           self.value = 2
@@ -870,7 +870,7 @@ class LeoMonster(Monster):
           
 class MonsterBig(Monster):
      def __init__(self,distance):
-          super(MonsterBig,self).__init__(distance)
+          super().__init__(distance)
           self.maxHealth = 1000
           self.health = self.maxHealth
           self.value = 10
