@@ -1,5 +1,12 @@
 from myButton import MyButton
 
+class UpgradeButton(MyButton):
+             
+    def pressed(self,money,displayTower):
+         if money >= displayTower.upgradeCost:
+              money -= displayTower.upgradeCost
+              displayTower.upgrade()
+
 class TargetButton(MyButton):
     def __init__(self, x, y, xTwo, yTwo, myType):
         super().__init__( x, y, xTwo, yTwo)

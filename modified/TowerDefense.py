@@ -5,7 +5,7 @@ import random
 import math
 from game import Game, GameObject
 from myButton import MyButton
-from buttons import NextWaveButton
+from buttons import NextWaveButton, UpgradeButton, TargetButton
 
 gridSize = 30 #the height and width of the array of blocks
 blockSize = 20 #pixels wide of each block
@@ -242,15 +242,7 @@ class SellButton(MyButton):
          displayTower.sold()
          displayTower = None
 
-class UpgradeButton(MyButton):
-             
-    def pressed(self):
-         global money
-         global displayTower
-         if money >= displayTower.upgradeCost:
-              money -= displayTower.upgradeCost
-              displayTower.upgrade()
-          
+         
 class Infoboard:
      def __init__(self, game):
           self.canvas = Canvas(master = game.frame, width = 162, height = 174, bg = "gray", highlightthickness = 0)
