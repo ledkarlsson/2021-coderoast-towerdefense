@@ -486,7 +486,7 @@ class Moneybar():
      def paint(self, canvas):
           canvas.create_text(240, 40, text="Money: " + self.text,fill="black")
 
-class Projectile(object):
+class Projectile():
      def __init__(self,x,y,damage,speed):
         self.hit = False
         self.x = x
@@ -578,7 +578,7 @@ class AngledProjectile(Projectile):
                projectiles.remove(self)
           
          
-class Tower(object):
+class Tower():
      def __init__(self,x,y,gridx,gridy):
           self.upgradeCost = None
           self.level = 1
@@ -715,7 +715,7 @@ class TackTower(TargetingTower):
              projectiles.append(AngledProjectile(self.x , self.y, self.damage, self.speed, self.angle,self.range))
  
      
-class Monster(object):
+class Monster():
      def __init__(self,distance):
           self.alive = True
           self.image = None
@@ -878,7 +878,7 @@ class MonsterBig(Monster):
           self.movement = float(blockSize)/6
           self.axis = 3*blockSize/2
 
-class Block(object):
+class Block():
      def __init__(self, x, y, blockNumber,gridx,gridy): #when i define a "Block", this is what happens
           self.x = x #sets Block x to the given 'x'
           self.y = y #sets Block y to the given 'y'
