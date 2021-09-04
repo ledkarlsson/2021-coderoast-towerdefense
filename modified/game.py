@@ -1,4 +1,5 @@
 import tkinter as tk
+from typing import Optional
 
 
 class Game():
@@ -11,6 +12,7 @@ class Game():
           self.frame.grid(row=0, column=0)
           self.timestep = timestep
           self.running = False
+          self.timer_id: Optional[str] = None
 
           # actually creates a window and puts our frame on it
           self.canvas = tk.Canvas(master=self.frame, width=width,
@@ -24,12 +26,16 @@ class Game():
           self.root.mainloop() #starts running the tkinter graphics loop          
 
      def _run(self):
-          self.update()  # calls the function 'def update(self):'
-          self.paint()  # calls the function 'def paint(self):'
-          self.root.after(self.timestep, self._run) # does a run of the function every timestep/1000 of a second
+          self.update()
+          self.paint()
+          if self.running:
+               self.timer_id = self.root.after(self.timestep, self._run) # does a run of the function every timestep/1000 of a second
 
      def end(self):
-        self.root.destroy()  # closes the game window and ends the program
+          self.running = False
+          if self.timer_id is not None:
+               self.root.after_cancel(self.timer_id)
+          self.root.destroy()  # closes the game window and ends the program
      
      def update(self):
           self.mouse.update()
