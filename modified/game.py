@@ -23,7 +23,7 @@ class Game():
           self.update()  # calls the function 'def update(self):'
           self.paint()  # calls the function 'def paint(self):'
 
-          # does a run of the function every 50/1000 = 1/20 of a second
+          # does a run of the function every timestep/1000 of a second
           self.root.after(self.timestep, self.run)
 
      def end(self):
