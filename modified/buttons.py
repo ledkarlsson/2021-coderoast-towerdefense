@@ -1,5 +1,19 @@
 from myButton import MyButton
 
+class StickyButton(MyButton):
+
+    def pressed(self,displayTower):
+         if displayTower.stickyTarget == False:
+             displayTower.stickyTarget = True
+         else:
+             displayTower.stickyTarget = False
+
+class SellButton(MyButton):
+             
+    def pressed(self,displayTower):
+         displayTower.sold()
+         displayTower = None
+
 class UpgradeButton(MyButton):
              
     def pressed(self,money,displayTower):
