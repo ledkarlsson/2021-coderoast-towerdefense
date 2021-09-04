@@ -916,16 +916,16 @@ class Block(object):
 
 class NormalBlock(Block):
      def __init__(self,x,y,blockNumber,gridx,gridy):
-          super(NormalBlock,self).__init__(x,y,blockNumber,gridx,gridy)
+          super().__init__(x,y,blockNumber,gridx,gridy)
 
 class PathBlock(Block):
      def __init__(self,x,y,blockNumber,gridx,gridy):
-          super(PathBlock,self).__init__(x,y,blockNumber,gridx,gridy)
+          super().__init__(x,y,blockNumber,gridx,gridy)
           self.canPlace = False         
 
 class WaterBlock(Block):
      def __init__(self,x,y,blockNumber,gridx,gridy):
-          super(WaterBlock,self).__init__(x,y,blockNumber,gridx,gridy)
+          super().__init__(x,y,blockNumber,gridx,gridy)
           self.canPlace = False 
 
 def main():
