@@ -3,7 +3,7 @@ from PIL import Image
 from PIL import ImageTk
 import random
 import math
-from game import Game
+from game import Game, GameObject
 
 gridSize = 30 #the height and width of the array of blocks
 blockSize = 20 #pixels wide of each block
@@ -32,13 +32,19 @@ displayTower = None
 class TowerDefenseGame(Game):
      def __init__(self): #setting up the window for the game here
           super().__init__(title="Tower Defense Ultra Mode", width=mapSize, height=mapSize, timestep=10)
+          self.initialize()
 
+     def initialize(self):
           self.displayboard = Displayboard(self)
           self.infoboard = Infoboard(self)
           self.towerbox = Towerbox(self)
           self.mouse = Mouse(self)
           self.gameMap = Map()
           self.wavegenerator = Wavegenerator(self)
+
+          self.add_object(self.mouse)
+          self.add_object(self.displayboard)
+          self.add_object(self.wavegenerator)
           self.run() 
 
      def update(self):
@@ -117,7 +123,7 @@ class Map:
          canvas.create_image(0,0, image = self.image, anchor = NW)
 
 
-class Wavegenerator:
+class Wavegenerator(GameObject):
      def __init__(self,game):
           self.game = game
           self.done = False
@@ -399,7 +405,7 @@ class Towerbox:
           selectedTower = str(self.box.get(self.box.curselection()))
           displayTower = None
           self.game.infoboard.displayGeneric()
-class Mouse:
+class Mouse(GameObject):
      def __init__(self,game): #when i define a "Mouse", this is what happens
           self.game = game
           self.x = 0

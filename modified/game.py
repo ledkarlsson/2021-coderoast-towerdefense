@@ -1,6 +1,12 @@
 import tkinter as tk
-from typing import Optional
+from typing import Optional, Protocol
 
+class GameObject(Protocol):
+     def update(self):
+          """Updates"""
+
+     def paint(self, canvas):
+          """paints"""
 
 class Game():
      def __init__(self, title: str, width: int, height: int, timestep: int = 50):
@@ -20,6 +26,14 @@ class Game():
           # makes the window called "canvas" complete
           self.canvas.grid(row=0, column=0, rowspan=2, columnspan=1)
 
+          self.objects: list[GameObject] = []
+
+     def add_object(self, object: GameObject):
+          self.objects.append(object)
+
+     def remove_object(self, object: GameObject):
+          self.objects.remove(object)
+
      def run(self):
           self.running = True
           self._run()
@@ -38,10 +52,9 @@ class Game():
           self.root.destroy()  # closes the game window and ends the program
      
      def update(self):
-          self.mouse.update()
-          self.wavegenerator.update()
-          self.displayboard.update()
-
+          for obj in self.objects:
+               obj.update()
+               
      def paint(self):
           self.canvas.delete(tk.ALL) #clear the screen
           self.gameMap.paint(self.canvas)
