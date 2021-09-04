@@ -89,7 +89,7 @@ class TowerDefenseGame(Game):
                displayTower.paintSelect(self.canvas)
           self.displayboard.paint()
 
-class Map():
+class Map:
     def __init__(self):
         self.image = None
         self.loadMap("LeoMap")
@@ -119,7 +119,7 @@ class Map():
          canvas.create_image(0,0, image = self.image, anchor = NW)
 
 
-class Wavegenerator():
+class Wavegenerator:
      def __init__(self,game):
           self.game = game
           self.done = False
@@ -403,7 +403,7 @@ class Towerbox:
           selectedTower = str(self.box.get(self.box.curselection()))
           displayTower = None
           self.game.infoboard.displayGeneric()
-class Mouse():
+class Mouse:
      def __init__(self,game): #when i define a "Mouse", this is what happens
           self.game = game
           self.x = 0
@@ -465,7 +465,7 @@ class Mouse():
                     canvas.create_image(self.gridx*blockSize,self.gridy*blockSize, image = self.canNotPressImage, anchor = NW)
      
                
-class Healthbar():
+class Healthbar:
      def __init__(self):
           self.text = str(health)
      
@@ -476,7 +476,7 @@ class Healthbar():
           canvas.create_text(40, 40, text="Health: " + self.text,fill="black")
      
 
-class Moneybar():
+class Moneybar:
      def __init__(self):
           self.text = str(money)
      
@@ -486,7 +486,7 @@ class Moneybar():
      def paint(self, canvas):
           canvas.create_text(240, 40, text="Money: " + self.text,fill="black")
 
-class Projectile():
+class Projectile:
      def __init__(self,x,y,damage,speed):
         self.hit = False
         self.x = x
@@ -578,7 +578,7 @@ class AngledProjectile(Projectile):
                projectiles.remove(self)
           
          
-class Tower():
+class Tower:
      def __init__(self,x,y,gridx,gridy):
           self.upgradeCost = None
           self.level = 1
@@ -715,7 +715,7 @@ class TackTower(TargetingTower):
              projectiles.append(AngledProjectile(self.x , self.y, self.damage, self.speed, self.angle,self.range))
  
      
-class Monster():
+class Monster:
      def __init__(self,distance):
           self.alive = True
           self.image = None
@@ -878,7 +878,7 @@ class MonsterBig(Monster):
           self.movement = float(blockSize)/6
           self.axis = 3*blockSize/2
 
-class Block():
+class Block:
      def __init__(self, x, y, blockNumber,gridx,gridy): #when i define a "Block", this is what happens
           self.x = x #sets Block x to the given 'x'
           self.y = y #sets Block y to the given 'y'
