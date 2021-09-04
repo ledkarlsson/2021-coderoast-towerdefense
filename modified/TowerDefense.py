@@ -31,7 +31,7 @@ displayTower = None
 
 class TowerDefenseGame(Game):
      def __init__(self): #setting up the window for the game here
-          super().__init__(mapSize=mapSize)
+          super().__init__(title="Tower Defense Ultra Mode", width=mapSize, height=mapSize, timestep=10)
 
           self.displayboard = Displayboard(self)
           self.infoboard = Infoboard(self)
