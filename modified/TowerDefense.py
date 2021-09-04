@@ -4,6 +4,7 @@ from PIL import ImageTk
 import random
 import math
 from game import Game, GameObject
+from myButton import MyButton
 
 gridSize = 30 #the height and width of the array of blocks
 blockSize = 20 #pixels wide of each block
@@ -249,25 +250,6 @@ class NextWaveButton:
           canvas.create_rectangle(self.x, self.y, self.xTwo, self.yTwo, fill=self.color, outline = self.color) #draws a rectangle where the pointer is
           canvas.create_text(500,37,text = "Next Wave")
           
-class MyButton:
-     def __init__(self, x, y, xTwo, yTwo):
-        self.x = x
-        self.y = y
-        self.xTwo = xTwo
-        self.yTwo = yTwo
-     
-     def checkPress(self, click, x, y):
-        if x >=self.x and y >= self.y and x <= self.xTwo and y <= self.yTwo:
-             self.pressed()
-             return True
-        return False
-
-     def pressed(self):
-         pass
-
-     def paint(self, canvas):
-        canvas.create_rectangle(self.x, self.y, self.xTwo, self.yTwo, fill="red", outline = "black")
-
 class TargetButton(MyButton):
     def __init__(self, x, y, xTwo, yTwo, myType):
         super().__init__( x, y, xTwo, yTwo)
