@@ -1,18 +1,18 @@
-from tkinter import *
+import tkinter as tk
 
 
 class Game():
      def __init__(self, title: str, width: int, height: int, timestep: int = 50):
-          self.root = Tk()  # saying this window will use tkinter
+          self.root = tk.Tk()  # saying this window will use tkinter
           self.root.title(title)
           self.running = True  # creating a variable RUN. does nothing yet.hu
           self.root.protocol("WM_DELETE_WINDOW", self.end)
-          self.frame = Frame(master=self.root)
+          self.frame = tk.Frame(master=self.root)
           self.frame.grid(row=0, column=0)
           self.timestep = timestep
 
           # actually creates a window and puts our frame on it
-          self.canvas = Canvas(master=self.frame, width=width,
+          self.canvas = tk.Canvas(master=self.frame, width=width,
                                height=height, bg="white", highlightthickness=0)
           # makes the window called "canvas" complete
           self.canvas.grid(row=0, column=0, rowspan=2, columnspan=1)
@@ -35,6 +35,6 @@ class Game():
           self.displayboard.update()
 
      def paint(self):
-          self.canvas.delete(ALL) #clear the screen
+          self.canvas.delete(tk.ALL) #clear the screen
           self.gameMap.paint(self.canvas)
           self.mouse.paint(self.canvas) #draw the mouse dot by going to its 'def paint(canvas):' command
