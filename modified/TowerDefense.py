@@ -23,7 +23,20 @@ def returning_tower(string: str):
           print("error in towers")
 
 def returning_monster(string: str):
-     pass
+     if string == 'Monster1':
+          return Monster1
+     elif string == 'Monster2':
+          return Monster2
+     elif string == 'AlexMonster':
+          return AlexMonster
+     elif string == 'BenMonster':
+          return BenMonster
+     elif string == 'LeoMonster':
+          return LeoMonster
+     elif string == 'MonsterBig':
+          return MonsterBig
+     else:
+          print("error in monsters")     
 
 def returning_block(string: int):
      if string == 'NormalBlock':
@@ -216,7 +229,8 @@ class Wavegenerator(GameObject):
          pathList.append(5)
 
      def spawnMonster(self):
-          self.monsterType = globals()[monsterDictionary[self.currentWave[self.currentMonster]]]
+          self.monsterType = returning_monster(monsterDictionary[self.currentWave[self.currentMonster]])
+          
           monsters.append(self.monsterType(0))
           self.currentMonster = self.currentMonster + 1
 
