@@ -18,6 +18,5 @@ monstersByDistanceReversed = []
 monstersListList = [monstersByHealth,monstersByHealthReversed,monstersByDistance,monstersByDistanceReversed]
 projectiles = []
 health = 100
-money = 5000000000
 selectedTower = "<None>"
 displayTower = None

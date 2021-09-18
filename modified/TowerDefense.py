@@ -7,10 +7,11 @@ from game import Game, GameObject
 from myButton import MyButton
 from buttons import *
 from tempGlobals import *
+import gameGlobal
 
 class GameState:
      def __init__(self, money):
-         self.money = money
+         self.money = gameGlobal.money
 class TowerDefenseGame(Game):
      def __init__(self): #setting up the window for the game here
           super().__init__(title="Tower Defense Ultra Mode", width=mapSize, height=mapSize, timestep=10)
@@ -26,7 +27,7 @@ class TowerDefenseGame(Game):
           self.add_object(self.displayboard)
           self.add_object(self.wavegenerator)
 
-          self.gameState = GameState(money)
+          self.gameState = GameState(gameGlobal.money)
           self.run() 
 
      def update(self):
@@ -384,10 +385,10 @@ class Healthbar:
 
 class Moneybar:
      def __init__(self):
-          self.text = str(money)
+          self.text = str(gameGlobal.money)
      
      def update(self):
-        self.text = str(money)
+        self.text = str(gameGlobal.money)
      
      def paint(self, canvas):
           canvas.create_text(240, 40, text="Money: " + self.text,fill="black")
@@ -643,8 +644,7 @@ class Monster:
 
      def update(self):
           if self.health <= 0:
-               global money
-               money += self.value
+               gameGlobal.money += self.value
                self.killed()
           self.move()
 
@@ -792,17 +792,16 @@ class Block:
      def hoveredOver(self,click,game):
           if click == True:
                global towerGrid
-               global money
                if towerGrid[self.gridx][self.gridy]:
                     if selectedTower == "<None>":
                         towerGrid[self.gridx][self.gridy].clicked = True
                         global displayTower
                         displayTower = towerGrid[self.gridx][self.gridy]
                         game.infoboard.displaySpecific()
-               elif selectedTower != "<None>" and self.canPlace == True and money >= towerCost[selectedTower]:
+               elif selectedTower != "<None>" and self.canPlace == True and gameGlobal.money >= towerCost[selectedTower]:
                     self.towerType = globals()[towerDictionary[selectedTower]]
                     towerGrid[self.gridx][self.gridy] = self.towerType(self.x,self.y,self.gridx,self.gridy)
-                    money -= towerCost[selectedTower]
+                    gameGlobal.money -= towerCost[selectedTower]
                     
 
      def update(self):
