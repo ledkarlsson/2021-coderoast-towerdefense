@@ -13,7 +13,7 @@ import gameGlobal
 def returning_tower(string: str):
      if string == 'ArrowShooterTower':
           return ArrowShooterTower
-     elif string == 'ArrowShooterTower':
+     elif string == 'BulletShooterTower':
           return BulletShooterTower
      elif string == 'TackTower':
           return TackTower
@@ -22,6 +22,18 @@ def returning_tower(string: str):
      else:
           print("error in towers")
 
+def returning_monster(string: str):
+     pass
+
+def returning_block(string: int):
+     if string == 'NormalBlock':
+          return NormalBlock
+     elif string == 'PathBlock':
+          return PathBlock
+     elif string == 'WaterBlock':
+          return WaterBlock
+     else:
+          print("error in blocks")
 class GameState:
      def __init__(self, money):
          self.money = gameGlobal.money
@@ -100,7 +112,9 @@ class Map:
         for y in range(gameGlobal.gridSize):
               for x in range(gameGlobal.gridSize):
                    self.blockNumber = self.gridValues[gameGlobal.gridSize*y + x]
-                   self.blockType = globals()[blockDictionary[self.blockNumber]]
+
+                   self.blockType = returning_block(blockDictionary[self.blockNumber])
+
                    gameGlobal.blockGrid[x][y] = self.blockType(x*gameGlobal.blockSize+gameGlobal.blockSize/2,y*gameGlobal.blockSize+gameGlobal.blockSize/2,self.blockNumber,x,y) #creates a grid of Blocks
                    gameGlobal.blockGrid[x][y].paint(self.drawnMap)
         self.drawnMap.save("images/mapImages/"+mapName+".png")
