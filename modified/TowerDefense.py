@@ -6,7 +6,7 @@ import math
 from game import Game, GameObject
 from myButton import MyButton
 from buttons import *
-from globals import *
+from tempGlobals import *
 
 class GameState:
      def __init__(self, money):
