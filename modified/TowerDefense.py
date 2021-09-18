@@ -37,9 +37,7 @@ class GameState:
 class TowerDefenseGame(Game):
      def __init__(self): #setting up the window for the game here
           super().__init__(title="Tower Defense Ultra Mode", width=mapSize, height=mapSize, timestep=10)
-          self.initialize()
 
-     def initialize(self):
           self.displayboard = Displayboard(self)
           self.infoboard = Infoboard(self)
           self.towerbox = Towerbox(self)
