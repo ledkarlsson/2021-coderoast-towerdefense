@@ -9,6 +9,19 @@ from buttons import *
 from tempGlobals import *
 import gameGlobal
 
+
+def returning_tower(string: str):
+     if string == 'ArrowShooterTower':
+          return ArrowShooterTower
+     elif string == 'ArrowShooterTower':
+          return BulletShooterTower
+     elif string == 'TackTower':
+          return TackTower
+     elif string == 'PowerTower':
+          return PowerTower
+     else:
+          print("error in towers")
+
 class GameState:
      def __init__(self, money):
          self.money = gameGlobal.money
@@ -262,12 +275,12 @@ class Infoboard:
 
      def displayGeneric(self):
           self.currentButtons = []
-          if selectedTower == "<None>":
+          if gameGlobal.selectedTower == "<None>":
                self.text = None
                self.towerImage = None
           else:
-               self.text = selectedTower + " cost: " + str(towerCost[selectedTower])
-               self.towerImage = ImageTk.PhotoImage(Image.open("images/towerImages/"+towerDictionary[selectedTower]+"/1.png"))
+               self.text = gameGlobal.selectedTower + " cost: " + str(towerCost[gameGlobal.selectedTower])
+               self.towerImage = ImageTk.PhotoImage(Image.open("images/towerImages/"+towerDictionary[gameGlobal.selectedTower]+"/1.png"))
           self.canvas.delete(ALL) #clear the screen
           self.canvas.create_image(0,0, image = self.image, anchor = NW)
           self.canvas.create_text(80,75,text = self.text)
@@ -304,9 +317,8 @@ class Towerbox:
           self.box.grid(row = 1, column = 1, rowspan = 2)
           self.box.bind("<<ListboxSelect>>", self.onselect)
      def onselect(self,event):
-          global selectedTower
           global displayTower
-          selectedTower = str(self.box.get(self.box.curselection()))
+          gameGlobal.selectedTower = str(self.box.get(self.box.curselection()))
           displayTower = None
           self.game.infoboard.displayGeneric()
 class Mouse(GameObject):
@@ -792,15 +804,15 @@ class Block:
           if click == True:
                global towerGrid
                if towerGrid[self.gridx][self.gridy]:
-                    if selectedTower == "<None>":
+                    if gameGlobal.selectedTower == "<None>":
                         towerGrid[self.gridx][self.gridy].clicked = True
                         global displayTower
                         displayTower = towerGrid[self.gridx][self.gridy]
                         game.infoboard.displaySpecific()
-               elif selectedTower != "<None>" and self.canPlace == True and gameGlobal.money >= towerCost[selectedTower]:
-                    self.towerType = globals()[towerDictionary[selectedTower]]
+               elif gameGlobal.selectedTower != "<None>" and self.canPlace == True and gameGlobal.money >= towerCost[gameGlobal.selectedTower]:
+                    self.towerType = returning_tower(towerDictionary[gameGlobal.selectedTower])
                     towerGrid[self.gridx][self.gridy] = self.towerType(self.x,self.y,self.gridx,self.gridy)
-                    gameGlobal.money -= towerCost[selectedTower]
+                    gameGlobal.money -= towerCost[gameGlobal.selectedTower]
                     
 
      def update(self):
